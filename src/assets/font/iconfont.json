@@ -1,0 +1,58 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "748774",
+      "name": "用户",
+      "font_class": "user",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "6322501",
+      "name": "订单管理",
+      "font_class": "el-icon-custom-order",
+      "unicode": "e502",
+      "unicode_decimal": 58626
+    },
+    {
+      "icon_id": "6405493",
+      "name": "商品管理",
+      "font_class": "dianpu",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "10836127",
+      "name": "权限管理",
+      "font_class": "quanxian",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "16713359",
+      "name": "数据 统计",
+      "font_class": "shujutongji",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "16903575",
+      "name": "密 码",
+      "font_class": "mima",
+      "unicode": "e520",
+      "unicode_decimal": 58656
+    },
+    {
+      "icon_id": "17776353",
+      "name": "用户 管理",
+      "font_class": "yonghuguanli",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    }
+  ]
+}
