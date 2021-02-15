@@ -17,6 +17,7 @@
     "@vue/cli-plugin-babel": "^3.0.4",
     "@vue/cli-service": "^3.0.4",
     "element-theme-chalk": "^2.14.1",
+    "router": "^1.3.5",
     "vue-cli-plugin-element": "^1.0.1",
     "vue-template-compiler": "^2.6.10"
   }

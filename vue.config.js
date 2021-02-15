@@ -1,3 +1,9 @@
+// 'use strict';
+// const path = require('path');
+
+// function resolve(dir) {
+//     return path.join(__dirname, dir)
+// }
 module.exports = {
     configureWebpack: {
         resolve: {
@@ -11,5 +17,10 @@ module.exports = {
 
             }
         }
+    },
+    chainWebpack: config => {
+        // 修复HMR
+        config.resolve.symlinks(true);
+
     }
 }

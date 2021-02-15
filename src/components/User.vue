@@ -56,8 +56,6 @@
                             <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
                         </el-tooltip>
                     </template>
-
-
                 </el-table-column>
             </el-table>
 
@@ -138,7 +136,6 @@
                 if (regEmail.test(value)) {
                     return cb()
                 }
-
                 cb(new Error('请输入合法的邮箱'))
 
             }
@@ -178,7 +175,7 @@
 
                 //添加用户名验证规则
                 addFormrules: {
-                    username: [{ required: true, message: '请输入登录名', trigger: 'blur' }, { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }],
+                    username: [{ required: true, message: '请输入登录名', trigger: 'blur' }, { min: 3, max: 10, message: '长度在 3 到 10个字符', trigger: 'blur' }],
                     password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { min: 3, max: 10, message: '长度在 3 到 10个字符', trigger: 'blur' }],
                     email: [{ required: true, message: '请输入邮箱', trigger: 'blur' }, { validator: checkEamil, trigger: 'blur' }],
                     mobile: [{ required: true, message: '请输入手机号', trigger: 'blur' }, { validator: checkMobile, trigger: 'blur' }],
@@ -218,14 +215,12 @@
             //编辑用户
 
             async editUserdialong(id) {
-                this.editId = id;
                 const { data: res } = await this.$http.get('users/' + id);
-
                 if (res.meta.status !== 200) {
                     return this.$message.error('获取用户信息失败')
                 }
                 // console.log(res);
-                this.editForm = res.data
+                this.editForm = res.data;
                 this.editUserblooen = true;
 
             },
@@ -241,10 +236,12 @@
             addUsers() {
                 this.$refs.addFormRef.validate(async valid => {
                     if (!valid) return
+
                     const { data: res } = await this.$http.post('users', this.addForm)
 
                     if (res.meta.status !== 201) { this.$message.error('添加用户失败') }
                     this.$message.success('添加用户成功');
+                    console.log(this.addForm);
                     // 关闭添加表单
                     this.addUserblooen = false;
                     // 重新刷新用户列表
@@ -286,8 +283,6 @@
             // 监测switch开关的状态
             async userStatechange(data) {
                 const { data: res } = await this.$http.put(`users/${data.id}/state/${data.mg_state}`)
-
-
                 if (res.meta.status !== 200) {
                     data.mg_state = !data.mg_state
                     return this.$message.error('更新失败')
@@ -317,8 +312,6 @@
                 this.getUserList()
 
             }
-
-
 
         }
     }

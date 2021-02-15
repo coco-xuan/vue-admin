@@ -60,7 +60,7 @@
                     '145': 'iconfont icon-shujutongji'
                 },
                 isToggle: false,
-                activePath: ' '
+                activePath: ""
             }
         },
         methods: {
@@ -76,8 +76,9 @@
                 this.isToggle = !this.isToggle
             },
             pathClick(res) {
-                this.activePath = res;
-                // console.log(this.activePath);
+                window.sessionStorage.setItem('activePath', res);
+                this.activePath = res
+
             }
         },
         created() {
@@ -85,7 +86,19 @@
             getMenusList().then(res => {
                 this.menusList = res.data;
                 // console.log(this.menusList);
-            })
+            });
+            this.activePath = window.sessionStorage.getItem('activePath');
+            if (this.activePath !== this.$route.path) {
+                this.activePath = this.$route.path;
+            }
+
+        },
+        watch: {
+            $route(to, from) {
+                this.activePath = to.path
+                window.sessionStorage.setItem('activePath', this.activePath);
+
+            }
         }
     }
 </script>

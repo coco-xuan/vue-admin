@@ -1,36 +1,48 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+
+
 const Login = () => import('./components/Login.vue')
 const Home = () => import('./components/Home.vue')
 const Welcome = () => import('./components/Welcome.vue')
 const User = () => import('./components/User.vue')
+const Rights = () => import('components/User/Rights.vue')
+const Roles = () => import('components/User/Roles.vue')
 Vue.use(Router)
+
+const routers = [
+  {
+    path: '/',
+    redirect: '/login'
+  },
+  {
+    path: '/login',
+    component: Login
+  }, {
+    path: '/home',
+    component: Home,
+    redirect: '/welcome',
+    children: [{
+      path: '/welcome',
+      component: Welcome
+    }, {
+      path: '/users',
+      component: User
+    }, {
+      path: '/rights',
+      component: Rights
+    }, {
+      path: '/roles',
+      component: Roles
+    }]
+  }
+]
+
 
 const router = new Router({
   mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      redirect: '/login'
-    },
-    {
-      path: '/login',
-      component: Login
-    }, {
-      path: '/home',
-      component: Home,
-      redirect: '/welcome',
-      children: [{
-        path: '/welcome',
-        component: Welcome
-      }, {
-        path: '/users',
-        component: User
-      }]
-    }
-  ]
+  routes: routers
 })
 
 // 挂载路由守卫  
