@@ -10,13 +10,13 @@ export function request(config) {
         config.headers.Authorization = window.sessionStorage.getItem('token')
         return config
     }, err => {
-        this.$message.error(err)
+        console.log(err);
     })
 
     instance.interceptors.response.use(res => {
         return res.data
     }, err => {
-        this.$message.error(err)
+        console.log(err);
     })
 
     return instance(config)

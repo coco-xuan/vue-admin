@@ -53,7 +53,8 @@
                         </el-button>
 
                         <el-tooltip class="item" effect="dark" content="分配角色" placement="top" :enterable="false">
-                            <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
+                            <el-button type="warning" icon="el-icon-setting" size="mini" @click="setRole(scope.row)">
+                            </el-button>
                         </el-tooltip>
                     </template>
                 </el-table-column>
@@ -64,7 +65,7 @@
 
 
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                :current-page="queryInfo.pagenum" :page-sizes="[1, 2, 5, 10]" :page-size="queryInfo.pagesize"
+                :current-page="queryInfo.pagenum" :page-sizes="[1, 2, 6, 10]" :page-size="queryInfo.pagesize"
                 layout="total, sizes, prev, pager, next, jumper" :total="total">
             </el-pagination>
 
@@ -117,7 +118,20 @@
             </span>
         </el-dialog>
 
-
+        <el-dialog title="分配角色" :visible.sync="setRoleDiablooen" width="50%" @close="setRoleDialongClose">
+            <p>当前的用户：{{userInfo.username}}</p>
+            <p>当前的角色： {{userInfo.role_name}}</p>
+            <p>分配新角色：
+                <el-select v-model="selectedRoleId" placeholder="请选择">
+                    <el-option v-for="item in rolesList" :key="item.id" :label="item.roleName" :value="item.id">
+                    </el-option>
+                </el-select>
+            </p>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="setRoleDiablooen = false">取 消</el-button>
+                <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
+            </span>
+        </el-dialog>
 
 
     </div>
@@ -156,12 +170,13 @@
                 queryInfo: {
                     query: '',
                     pagenum: 1,
-                    pagesize: 2
+                    pagesize: 6
                 },
                 userlist: [],
                 total: 0,
                 addUserblooen: false,
                 editUserblooen: false,
+                setRoleDiablooen: false,
                 addForm: {
                     username: '',
                     password: '',
@@ -169,6 +184,12 @@
                     email: ''
                 },
                 editForm: {},
+                // 需要被分配权限得角色
+                userInfo: {},
+                // 所有角色的列表
+                rolesList: [],
+                // 你选中的角色id值
+                selectedRoleId: '',
 
 
 
@@ -311,7 +332,43 @@
                 this.$message.success('删除用户成功');
                 this.getUserList()
 
+            },
+
+
+            // 控制分配角色
+            async setRole(userInfo) {
+                this.userInfo = userInfo
+                // 在展示对话框之前，获取所有角色列表
+                const { data: res } = await this.$http.get('/roles')
+                if (res.meta.status !== 200) {
+                    return this.$message.error('获取角色列表失败')
+                }
+                this.rolesList = res.data
+                this.setRoleDiablooen = true
+            },
+            //点击按钮，分配角色
+            async saveRoleInfo() {
+                if (!this.selectedRoleId) {
+                    return this.$message.error('请选择分配的角色')
+                }
+                const { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, { id: this.userInfo.id, rid: this.selectedRoleId })
+                // console.log(res);
+                // console.log(this.userInfo);
+                // console.log(this.selectedRoleId);
+                if (res.meta.status !== 200) {
+                    return this.$message.error('更新角色失败！')
+                }
+                this.$message.success('更新角色成功！')
+                this.getUserList()
+                this.setRoleDiablooen = false
+            },
+            // 监听分配角色对话框的关闭事件
+            setRoleDialongClose() {
+                this.selectedRoleId = ''
+                this.userInfo = ''
+
             }
+
 
         }
     }
