@@ -78,19 +78,7 @@
                     </template>
                 </el-table-column>
 
-
             </el-table>
-
-
-
-
-
-
-
-
-
-
-
 
         </el-card>
 
@@ -132,14 +120,8 @@
         <!-- 分配权限 -->
 
         <el-dialog title="提示" width="30%" :visible.sync="setRightblooen" @close="setRightClosed">
-
-
             <el-tree :data="rightslist" :props="treeProps" show-checkbox node-key="id" default-expand-all
                 :default-checked-keys="defKeys" ref="treeRef"></el-tree>
-
-
-
-
             <span slot="footer" class="dialog-footer">
                 <el-button @click="setRightblooen = false">取 消</el-button>
                 <el-button type="primary" @click="setRight">确 定</el-button>

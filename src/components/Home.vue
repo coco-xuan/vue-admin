@@ -78,6 +78,7 @@
             pathClick(res) {
                 window.sessionStorage.setItem('activePath', res);
                 this.activePath = res
+                console.log(this.activePath);
 
             }
         },
@@ -88,13 +89,20 @@
                 // console.log(this.menusList);
             });
             this.activePath = window.sessionStorage.getItem('activePath');
-            if (this.activePath !== this.$route.path) {
+            if (this.activePath !== this.$route.path && this.$route.path !== '/goods/add') {
                 this.activePath = this.$route.path;
+            } else {
+                this.activePath = window.sessionStorage.getItem('activePath')
             }
 
         },
         watch: {
             $route(to, from) {
+                if (to.path === '/goods/add') {
+                    this.activePath = '/goods'
+                    window.sessionStorage.setItem('activePath', this.activePath);
+                    return
+                }
                 this.activePath = to.path
                 window.sessionStorage.setItem('activePath', this.activePath);
 
@@ -151,6 +159,7 @@
 
     .el-main {
         background-color: #eee;
+        box-sizing: border-box;
     }
 
     .iconfont {
@@ -159,5 +168,16 @@
 
     .el-menu {
         border: 0;
+    }
+
+
+    .el-main {
+        padding-top: 10px;
+    }
+
+    .el-tag {
+        cursor: pointer;
+        margin-bottom: 8px;
+        margin-right: 8px;
     }
 </style>

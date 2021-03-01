@@ -7,10 +7,15 @@ const Login = () => import('./components/Login.vue')
 const Home = () => import('./components/Home.vue')
 const Welcome = () => import('./components/Welcome.vue')
 const User = () => import('./components/User.vue')
-const Rights = () => import('components/User/Rights.vue')
-const Roles = () => import('components/User/Roles.vue')
+const Rights = () => import('components/user/Rights.vue')
+const Roles = () => import('components/user/Roles.vue')
 const Cate = () => import('components/goods/Cate.vue')
 const Params = () => import('components/goods/Params.vue')
+const GoodList = () => import('components/goods/List.vue')
+const Add = () => import('components/goods/Add.vue')
+const Order = () => import('components/order/Order.vue')
+const Report = () => import('components/report/Report.vue')
+
 Vue.use(Router)
 
 const routers = [
@@ -44,6 +49,21 @@ const routers = [
     }, {
       path: '/params',
       component: Params
+    },
+    {
+      path: '/goods',
+      component: GoodList,
+
+    }, {
+      path: '/goods/add',
+      component: Add
+    },
+    {
+      path: '/orders',
+      component: Order
+    }, {
+      path: '/reports',
+      component: Report
     }]
   }
 ]
