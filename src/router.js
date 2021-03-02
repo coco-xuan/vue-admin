@@ -3,18 +3,22 @@ import Router from 'vue-router'
 
 
 
-const Login = () => import('./components/Login.vue')
-const Home = () => import('./components/Home.vue')
-const Welcome = () => import('./components/Welcome.vue')
-const User = () => import('./components/User.vue')
-const Rights = () => import('components/user/Rights.vue')
-const Roles = () => import('components/user/Roles.vue')
-const Cate = () => import('components/goods/Cate.vue')
-const Params = () => import('components/goods/Params.vue')
-const GoodList = () => import('components/goods/List.vue')
-const Add = () => import('components/goods/Add.vue')
-const Order = () => import('components/order/Order.vue')
-const Report = () => import('components/report/Report.vue')
+const Login = () => import(/* webpackChunkName: "login_home_welcome"  */ './components/Login.vue')
+const Home = () => import( /* webpackChunkName: "login_home_welcome"  */'./components/Home.vue')
+const Welcome = () => import( /* webpackChunkName: "login_home_welcome"  */'./components/Welcome.vue')
+
+const User = () => import(/* webpackChunkName: "user_rights_roles"  */'./components/User.vue')
+const Rights = () => import(/* webpackChunkName: "user_rights_roles"  */'components/user/Rights.vue')
+const Roles = () => import( /* webpackChunkName: "user_rights_roles"  */'components/user/Roles.vue')
+
+const Cate = () => import( /* webpackChunkName: "cate_params"  */'components/goods/Cate.vue')
+const Params = () => import(/* webpackChunkName: "cate_params"  */'components/goods/Params.vue')
+
+const GoodList = () => import( /* webpackChunkName: "good_add"  */'components/goods/List.vue')
+const Add = () => import(/* webpackChunkName: "good_add"  */'components/goods/Add.vue')
+
+const Order = () => import( /* webpackChunkName: "order_report"  */'components/order/Order.vue')
+const Report = () => import(/* webpackChunkName: "order_report"  */'components/report/Report.vue')
 
 Vue.use(Router)
 
@@ -75,6 +79,8 @@ const router = new Router({
 })
 
 // 挂载路由守卫  
+
+
 
 router.beforeEach((to, from, next) => {
   // to表示访问的路径

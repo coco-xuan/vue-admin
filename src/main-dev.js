@@ -4,7 +4,7 @@ import router from './router'
 import './plugins/element.js'
 import './assets/css/base.css'
 import './assets/font/iconfont.css'
-import ElementUI from 'element-ui'
+// import ElementUI from 'element-ui'
 import axios from 'axios'
 import TreeTable from 'vue-table-with-tree-grid'
 
@@ -14,16 +14,42 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
+// 导入进度条
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+
+
+
+
 Vue.prototype.$http = axios;
 axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1'
 axios.interceptors.request.use(config => {
+  NProgress.start()
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config
 })
 
+axios.interceptors.response.use(config => {
+  NProgress.done()
+  return config
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 Vue.component('tree-table', TreeTable)
 Vue.config.productionTip = false
-Vue.use(ElementUI)
 Vue.use(VueQuillEditor)
 
 Vue.filter('dateFormat', function (originVal) {

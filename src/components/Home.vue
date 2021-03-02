@@ -33,8 +33,6 @@
                     </el-submenu>
 
                 </el-menu>
-
-
             </el-aside>
             <el-main>
                 <router-view></router-view>
@@ -86,7 +84,7 @@
 
             getMenusList().then(res => {
                 this.menusList = res.data;
-                // console.log(this.menusList);
+                console.log(this.menusList);
             });
             this.activePath = window.sessionStorage.getItem('activePath');
             if (this.activePath !== this.$route.path && this.$route.path !== '/goods/add') {
@@ -154,6 +152,7 @@
 
     .el-aside {
         background-color: #313743;
+
 
     }
 
