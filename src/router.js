@@ -8,8 +8,8 @@ const Home = () => import( /* webpackChunkName: "login_home_welcome"  */'./compo
 const Welcome = () => import( /* webpackChunkName: "login_home_welcome"  */'./components/Welcome.vue')
 
 const User = () => import(/* webpackChunkName: "user_rights_roles"  */'./components/User.vue')
-const Rights = () => import(/* webpackChunkName: "user_rights_roles"  */'components/user/Rights.vue')
-const Roles = () => import( /* webpackChunkName: "user_rights_roles"  */'components/user/Roles.vue')
+const Rights = () => import(/* webpackChunkName: "user_rights_roles"  */'components/User/Rights.vue')
+const Roles = () => import( /* webpackChunkName: "user_rights_roles"  */'components/User/Roles.vue')
 
 const Cate = () => import( /* webpackChunkName: "cate_params"  */'components/goods/Cate.vue')
 const Params = () => import(/* webpackChunkName: "cate_params"  */'components/goods/Params.vue')
