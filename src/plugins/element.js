@@ -99,3 +99,4 @@ Vue.use(CheckboxGroup)
 Vue.use(Upload)
 
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm;
